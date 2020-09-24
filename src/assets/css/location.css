@@ -1,0 +1,38 @@
+h3{
+    margin-top: 2.5%;
+    text-align: center;
+    color: #312450;
+}
+
+.form{
+    background: lavender;
+    /*float: left;*/
+    min-width: 50%;
+    padding: 40px 40px 40px 40px;
+    /*padding-right: 40px;*/
+    border-radius: 5px;
+    margin-left: 15em;
+
+}
+
+h5{
+    color: mediumslateblue;
+}
+
+.form2{
+    margin-left: 2em;
+    font-family: Margarine;
+    font-size: 40px;
+}
+
+@media screen and (min-height: 750px) and  (min-width: 750px){
+    .form{
+        width: 100%;
+        padding: 60px 60px 60px 60px;
+        margin-left: 2%;
+        margin-top: 5%;
+    }
+    .form2{
+        margin-left: 23%;
+    }
+}

@@ -1,0 +1,70 @@
+
+
+.diagram {
+    width: 45%;
+    vertical-align: text-top;
+    display: inline-block;
+}
+
+.chart{
+    width: 40vh;
+    height: 40vh;
+}
+.navbar {
+    width: 100%;
+    background-color: lavender;
+    overflow: auto;
+    border: #312450;
+}
+
+.navbar a {
+    float: left;
+    /*padding: 5px;*/
+    color: #312450;
+    text-decoration: none;
+    font-family: Margarine;
+    font-size: 15px;
+    width: 33.33%;
+    text-align: center;
+}
+
+
+.navbar a:hover {
+    background-color: #312450;
+    color: white;
+}
+
+.navbar a --active {
+    background-color: #312450;
+
+}
+
+h3{
+    margin-top: 2.5%;
+    text-align: center;
+    color: #312450;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+    }
+}
+@media screen and  (min-width: 900px){
+    .navbar a {
+        font-size: 20px;
+    }
+
+}

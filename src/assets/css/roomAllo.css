@@ -1,0 +1,36 @@
+.text{
+    font-size: 16px;
+}
+.dateTime{
+    width: 150px;
+    height: 30px;
+    font-size: 15px;
+}
+.form{
+    background: lavender;
+    float: left;
+    width: 100%;
+    padding: 40px 40px 40px 40px;
+    /*padding-right: 40px;*/
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.rooms{
+    width: 50%;
+}
+
+@media screen and (min-height: 750px) and  (min-width: 750px){
+    .form{
+        width: 60%;
+        padding: 60px 60px 60px 60px;
+        margin-left: 20%;
+        margin-top: 5%;
+    }
+    .rooms{
+        width: 40%;
+    }
+    .dateTime{
+        width: 200px;
+    }
+}

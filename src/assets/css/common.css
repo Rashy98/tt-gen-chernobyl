@@ -1,0 +1,56 @@
+.main {
+    margin-left: 14.9rem; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+.rectangle{
+    height: 50px;
+    width: 100%;
+    background-color: #312450;
+    margin-top: -8px;
+    margin-left: 5rem;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
+Table thead{
+
+    background-color: #312450;
+    color: white;
+}
+
+Table{
+    margin-top: 4.5%;
+   background-color: lavender;
+}
+button{
+    background-color: #312450;
+    color: #DDCCDD;
+    border-radius: 15%;
+}
+
+table{
+    text-align: center;
+}
+
+table th{
+    font-size: 20px;
+}
+table td{
+    font-size: 18px;
+}
+
+.table-striped tr:nth-child(2n+2){
+    background-color:lavender;
+}
+
+/*.table-striped tr:nth-child(2n+1){*/
+/*    background-color:lavender;*/
+/*}*/
+
+.statistics{
+    background-color: lavender;
+    /*border: 2px;*/
+}
