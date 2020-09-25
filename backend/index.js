@@ -27,6 +27,8 @@ const Session = require('./routes/session');
 const GenSession = require('./routes/generatedSession');
 
 app.use('/workingdays', require('./routes/workingDays'));
+app.use('/generateTable', require('../backend/routes/generateTimeTable'));
+app.use('/table', require('../backend/routes/getTables'));
 app.use('/building', Building);
 app.use('/room',Room);
 app.use('/tag', AddTag);
