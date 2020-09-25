@@ -170,10 +170,17 @@ async function generateTable(){
         }
 
         for (let weekday of arr_RoomsTable){
+
+            let lecturerNames = ''
+
+            for (let lecturer of weekday.lecturerName){
+                lecturerNames = lecturerNames + lecturer.name + "\n";
+            }
+
             const session = new RoomsTable({
                 room : weekday.room,
                 subject : weekday.subject,
-                lecturerName : weekday.lecturerName,
+                lecturerName : lecturerNames,
                 lecturerLevel : weekday.lecturerLevel,
                 groups : weekday.groups,
                 day : weekday.day,
@@ -187,10 +194,15 @@ async function generateTable(){
         }
 
         for (let weekend of arr_RoomsTableWeekend){
+            let lecturerNames = ''
+            for (let lecturer of weekend.lecturerName){
+                lecturerNames = lecturerNames + lecturer.name ;
+            }
+
             const session = new RoomsTable({
                 room : weekend.room,
                 subject : weekend.subject,
-                lecturerName : weekend.lecturerName,
+                lecturerName : lecturerNames,
                 lecturerLevel : weekend.lecturerLevel,
                 groups : weekend.groups,
                 day : weekend.day,

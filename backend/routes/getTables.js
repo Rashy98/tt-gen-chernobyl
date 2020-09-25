@@ -3,6 +3,7 @@ const express = require('express');
 const router = require('express').Router();
 
 let RoomsTable = require('../models/RoomsTable.model');
+let WorkingDays = require('../models/WorkingDays.model');
 
 let arr_table = []
 let arr_tempTable = []
@@ -41,62 +42,15 @@ router.route('/getTable').get(async (req, res) => {
     }
 })
 
-// router.route('/getLecturerTable').get(async (req, res) => {
-//     arr_tempTable = await RoomsTable.find();
-//
-//     if (arr_tempTable.length > 0){
-//
-//         for (let tempSession of arr_tempTable){
-//             let lecturerArray = tempSession.lecturerName;
-//             let lecturerNames = '';
-//
-//             for (let lecturer of lecturerArray){
-//                 lecturerNames = lecturerNames + lecturer + "\n";
-//             };
-//
-//             const studentTable = {
-//                 subject : tempSession.subject,
-//                 group : tempSession.groups,
-//                 room : tempSession.room,
-//                 lecturer : lecturerNames
-//             };
-//
-//             arr_table.push(studentTable);
-//         }
-//
-//         return res.status(200).json({success : true, table : arr_table})
-//     } else {
-//         return res.status(400).json({success : false, msg : "Cannot Get Student Table"})
-//     }
-// })
+router.route('/getWorkingDays').get(async (req, res) => {
 
-// router.route('/getRoomsTable').get(async (req, res) => {
-//     arr_tempTable = await RoomsTable.find();
-//
-//     if (arr_tempTable.length > 0){
-//
-//         for (let tempSession of arr_tempTable){
-//             let lecturerArray = tempSession.lecturerName;
-//             let lecturerNames = '';
-//
-//             for (let lecturer of lecturerArray){
-//                 lecturerNames = lecturerNames + lecturer + "\n";
-//             };
-//
-//             const studentTable = {
-//                 subject : tempSession.subject,
-//                 group : tempSession.groups,
-//                 room : tempSession.room,
-//                 lecturer : lecturerNames
-//             };
-//
-//             arr_table.push(studentTable);
-//         }
-//
-//         return res.status(200).json({success : true, table : arr_table})
-//     } else {
-//         return res.status(400).json({success : false, msg : "Cannot Get Student Table"})
-//     }
-// })
+    let workingDays = await WorkingDays.find();
+
+    if (workingDays){
+        return res.status(200).json({success : true, workingDays : workingDays})
+    } else {
+        return res.status(400).json({success : false, msg : "Cannot Read Working Days"})
+    }
+})
 
 module.exports = router;
