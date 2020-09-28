@@ -4,6 +4,8 @@ const router = require('express').Router();
 
 let RoomsTable = require('../models/RoomsTable.model');
 let WorkingDays = require('../models/WorkingDays.model');
+let Sessions = require('../models/Session.model');
+let Lecturer = require('../models/Lecturer.model');
 
 let arr_table = []
 let arr_tempTable = []
@@ -50,6 +52,32 @@ router.route('/getWorkingDays').get(async (req, res) => {
         return res.status(200).json({success : true, workingDays : workingDays})
     } else {
         return res.status(400).json({success : false, msg : "Cannot Read Working Days"})
+    }
+})
+
+router.route('/getGroups').get(async (req, res) => {
+
+    let groups = await Sessions.aggregate([{
+        $group : {
+            _id : {GroupOrSubGroupName: "$GroupOrSubGroupName"}
+        }
+    }]);
+
+    if (groups) {
+        return res.json({success : true, groups : groups});
+    } else {
+        return res.json({success : false, msg : "Cannot Read Groups"});
+    }
+})
+
+router.route('/getLecturers').get(async (req, res) => {
+
+    let lecturers = await Lecturer.find();
+
+    if (lecturers) {
+        return res.json({success : true, lecturers : lecturers});
+    } else {
+        return res.json({success : false, msg : "Cannot Read Groups"});
     }
 })
 
