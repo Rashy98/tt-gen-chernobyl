@@ -6,6 +6,7 @@ let RoomsTable = require('../models/RoomsTable.model');
 let WorkingDays = require('../models/WorkingDays.model');
 let Sessions = require('../models/Session.model');
 let Lecturer = require('../models/Lecturer.model');
+let Rooms = require('../models/Room.model')
 
 let arr_table = []
 let arr_tempTable = []
@@ -78,6 +79,17 @@ router.route('/getLecturers').get(async (req, res) => {
         return res.json({success : true, lecturers : lecturers});
     } else {
         return res.json({success : false, msg : "Cannot Read Groups"});
+    }
+})
+
+router.route('/getRooms').get(async (req, res) => {
+
+    let rooms = await Rooms.find();
+
+    if (rooms){
+        return res.status(200).json({success : true, rooms : rooms});
+    } else {
+        return res.status(200).json({success : false, rooms : rooms})
     }
 })
 

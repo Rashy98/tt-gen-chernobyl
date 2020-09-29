@@ -84,9 +84,11 @@ export default class TimeTable extends Component{
             sessionTable : [],
             table : [],
             groups : [],
+            rooms : [],
             category : 'Student',
             selectedGroup : '',
-            selectedLecturer : ''
+            selectedLecturer : '',
+            selectedRoom : ''
         }
 
         this.onChangeDrop = this.onChangeDrop.bind(this);
@@ -206,26 +208,23 @@ export default class TimeTable extends Component{
                 } else {
                     console.log('groups failed')
                 }
+            } else if (this.state.category === 'Room'){
+                let rooms = await axios.get('http://localhost:8000/table/getRooms')
+
+                if (rooms.data.success){
+                    let arr_rooms = [];
+
+                    for (let room of rooms.data.rooms){
+                        arr_rooms.push(room.room);
+                    }
+                    this.setState({
+                        groups : arr_rooms
+                    })
+                } else {
+                    console.log('Rooms Failed')
+                }
             }
         }
-
-        // if (prevState.selectedGroup !== this.state.selectedGroup){
-        //     let tempTable = [];
-        //     tempTable = [...this.state.sessionTable];
-        //
-        //     tempTable = tempTable.filter(obj => obj.group === this.state.selectedGroup);
-        //     tempTable.sort(function (time1, time2){
-        //         return time1.time - time2.time;
-        //     })
-        //
-        //     // console.log(tempTable)
-        //
-        //     this.setState({
-        //         table : tempTable
-        //     })
-        //
-        //     this.createRow();
-        // }
     }
 
     onChangeDrop(e) {
@@ -238,8 +237,14 @@ export default class TimeTable extends Component{
                 selectedGroup : e.target.value
             })
 
-            tempTable = [...this.state.sessionTable];
-            console.log(tempTable)
+            let rashini = [...this.state.sessionTable];
+            tempTable = [];
+
+            for (let temp of rashini){
+                if (temp.group.match(new RegExp(e.target.value, 'g'))){
+                    tempTable.push(temp)
+                }
+            }
 
             tempTable = tempTable.filter(obj => obj.group === e.target.value);
         } else if (this.state.category === 'Lecturer'){
@@ -252,30 +257,34 @@ export default class TimeTable extends Component{
 
             for (let temp of rashini){
 
-                if (temp.lecturer === new RegExp('^' + e.target.value, 'i')){
+                if (temp.lecturer.match(new RegExp(e.target.value, 'g'))){
                     tempTable.push(temp);
                 }
             }
+        } else if (this.state.category === 'Room'){
+            this.setState({
+                selectedRoom : e.target.value
+            })
+            let rashini = [...this.state.sessionTable];
+            tempTable = [];
 
-        console.log(tempTable)
+            for (let temp of rashini){
+                if (temp.room.match(new RegExp(e.target.value, 'g'))){
+                    tempTable.push(temp)
+                }
+            }
+
+
         }
 
-        // tempTable = [...this.state.sessionTable];
-        // console.log(tempTable)
-        //
-        // tempTable = tempTable.filter(obj => obj.group === e.target.value);
         console.log(tempTable)
         tempTable.sort(function (time1, time2){
             return time1.time - time2.time;
         })
 
-        // console.log(tempTable)
-
         this.setState({
             table : tempTable
         })
-
-        // this.createRow();
     }
 
     onChangeCategory(e){
@@ -298,7 +307,8 @@ export default class TimeTable extends Component{
         return arr_row;
     }
 
-    async createRow(){
+    async createRow(e){
+        e.preventDefault();
 
         let iDay = 0;
         let htmlTag = '';
@@ -333,7 +343,7 @@ export default class TimeTable extends Component{
                     for (i; i < 8;){
 
                         if (i === iDay){
-                            htmlTag = htmlTag + '<td>' +subject.subject+ '<br/>' +subject.group+'</td>';
+                            htmlTag = htmlTag + '<td rowspan="'+subject.duration+'">' +subject.subject+ '<br/>'+ subject.lecturer + '<br/>' +subject.group+'</td>';
                             i++;
                             break;
                         } else {
@@ -342,17 +352,6 @@ export default class TimeTable extends Component{
 
                         i++;
                     }
-
-                    // while (i !== iDay){
-                    //
-                    //     if (i === iDay){
-                    //         htmlTag = htmlTag + '<td>' +subject.subject+ '</td>'
-                    //     } else {
-                    //         htmlTag = htmlTag + '<td>---</td>'
-                    //     }
-                    //
-                    //     i++;
-                    // }
                 }
 
                 if (i < 8){
@@ -372,57 +371,11 @@ export default class TimeTable extends Component{
             }
         }
 
-
-        // this.state.table.map(subject => {
-        //
-        //     let time = subject.time;
-        //     let sub = subject.subject;
-        //
-        //
-        //     if (prevTime !==  time){
-        //         htmlTag = htmlTag + '<tr><td>' +time+ '</td>'
-        //
-        //         switch (subject.day){
-        //             case 'Monday' : iDay = 0;
-        //                 break;
-        //             case 'Tuesday' : iDay = 1;
-        //                 break;
-        //             case 'Wednesday' : iDay = 2;
-        //                 break;
-        //             case 'Thursday' : iDay = 3;
-        //                 break;
-        //             case 'Friday' : iDay = 4;
-        //                 break;
-        //             case 'Saturday' : iDay = 5;
-        //                 break;
-        //             case 'Sunday' : iDay = 6;
-        //                 break;
-        //         }
-        //
-        //         for (let i = 0; i < 7; i++){
-        //
-        //             if (i === iDay){
-        //                 htmlTag = htmlTag + '<td>' +sub+ '</td>'
-        //             } else {
-        //                 htmlTag = htmlTag + '<td>---</td>'
-        //             }
-        //         }
-        //     }
-        //
-        //
-        //
-        //     prevTime = time;
-        // })
-        //
-        //
-        //
-        // htmlTag = htmlTag + '</tr>'
-
         document.getElementById("tableBody").innerHTML = htmlTag;
     }
 
     render() {
-        let arr;
+
         return(
             <div className="main">
                 <div className="row mt-5 align-content-center">
@@ -469,7 +422,7 @@ export default class TimeTable extends Component{
                 </div>
 
                 <div>
-                    <table className="table">
+                    <table className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Time</th>
