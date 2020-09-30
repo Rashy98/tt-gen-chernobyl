@@ -21,13 +21,15 @@ export default class NavBar extends Component{
 
         e.preventDefault();
 
-        let response = await axios.get('http://localhost:8000/generateTable/getStudentTable');
 
-        if (response.data.success){
-
-        } else {
-            alert('Failed to generate table')
-        }
+console.log('here')
+        // let response = await axios.get('http://localhost:8000/generateTable/getStudentTable');
+        //
+        // if (response.data.success){
+        //
+        // } else {
+        //     alert('Failed to generate table')
+        // }
 
     }
     render() {

@@ -110,7 +110,7 @@ export default class TimeTable extends Component{
         let weekendTimeSlots;
         let sessionTable = [];
 
-        workingDays = await axios.get('http://localhost:8000/generateTable/getStudentTable');
+        workingDays = await axios.get('http://localhost:8000/table/getWorkingDays');
 
         for (let workingDay of workingDays.data.workingDays){
 
