@@ -110,7 +110,7 @@ export default class TimeTable extends Component{
         let weekendTimeSlots;
         let sessionTable = [];
 
-        workingDays = await axios.get('http://localhost:8000/table/getWorkingDays');
+        workingDays = await axios.get('http://localhost:8000/generateTable/getStudentTable');
 
         for (let workingDay of workingDays.data.workingDays){
 
@@ -152,7 +152,7 @@ export default class TimeTable extends Component{
                  sessionTable : response.data.table
              })
         } else {
-            console.log('response failed')
+            alert('response failed')
         }
 
         let groups = await axios.get('http://localhost:8000/table/getGroups');
@@ -168,71 +168,76 @@ export default class TimeTable extends Component{
                 groups : arr_groups
             })
         } else {
-            console.log('groups failed')
+            alert('groups failed')
         }
     }
 
-    async componentDidUpdate(prevProps, prevState, snapshot) {
-
-        if (prevState.category !== this.state.category){
-            if (this.state.category === 'Student'){
-                let groups = await axios.get('http://localhost:8000/table/getGroups');
-
-                if(groups.data.success){
-                    let arr_groups = [];
-
-                    for (let group of groups.data.groups){
-                        arr_groups.push(group._id.GroupOrSubGroupName)
-                    }
-
-                    this.setState({
-                        groups : arr_groups
-                    })
-                } else {
-                    console.log('groups failed')
-                }
-            } else if (this.state.category === 'Lecturer'){
-                let lecturers = await axios.get('http://localhost:8000/table/getLecturers');
-
-                if(lecturers.data.success){
-
-                    let arr_lecturers = [];
-
-                    for (let lecturer of lecturers.data.lecturers){
-                        arr_lecturers.push(lecturer.fullName)
-                    }
-
-                    this.setState({
-                        groups : arr_lecturers
-                    })
-                } else {
-                    console.log('groups failed')
-                }
-            } else if (this.state.category === 'Room'){
-                let rooms = await axios.get('http://localhost:8000/table/getRooms')
-
-                if (rooms.data.success){
-                    let arr_rooms = [];
-
-                    for (let room of rooms.data.rooms){
-                        arr_rooms.push(room.room);
-                    }
-                    this.setState({
-                        groups : arr_rooms
-                    })
-                } else {
-                    console.log('Rooms Failed')
-                }
-            }
-        }
-    }
+    // async componentDidUpdate(prevProps, prevState, snapshot) {
+    //
+    //     if (prevState.category !== this.state.category){
+    //         if (this.state.category === 'Student'){
+    //             let groups = await axios.get('http://localhost:8000/table/getGroups');
+    //
+    //             if(groups.data.success){
+    //                 let arr_groups = [];
+    //
+    //                 for (let group of groups.data.groups){
+    //                     arr_groups.push(group._id.GroupOrSubGroupName)
+    //                 }
+    //
+    //                 this.setState({
+    //                     groups : arr_groups
+    //                 })
+    //             } else {
+    //                 console.log('groups failed')
+    //             }
+    //         } else if (this.state.category === 'Lecturer'){
+    //             let lecturers = await axios.get('http://localhost:8000/table/getLecturers');
+    //
+    //             if(lecturers.data.success){
+    //
+    //                 let arr_lecturers = [];
+    //
+    //                 for (let lecturer of lecturers.data.lecturers){
+    //                     arr_lecturers.push(lecturer.fullName)
+    //                 }
+    //
+    //                 this.setState({
+    //                     groups : arr_lecturers
+    //                 })
+    //             } else {
+    //                 console.log('groups failed')
+    //             }
+    //         } else if (this.state.category === 'Room'){
+    //             let rooms = await axios.get('http://localhost:8000/table/getRooms')
+    //
+    //             if (rooms.data.success){
+    //                 let arr_rooms = [];
+    //
+    //                 for (let room of rooms.data.rooms){
+    //                     arr_rooms.push(room.room);
+    //                 }
+    //                 this.setState({
+    //                     groups : arr_rooms
+    //                 })
+    //             } else {
+    //                 console.log('Rooms Failed')
+    //             }
+    //         }
+    //     }
+    // }
 
     onChangeDrop(e) {
 
         e.preventDefault();
         let tempTable = []
 
+        let index = e.target.selectedIndex;
+        let el = e.target.childNodes[index]
+        let selectedId =  el.getAttribute('id');
+
         if (this.state.category === 'Student'){
+            selectedId = 0;
             this.setState({
                 selectedGroup : e.target.value
             })
@@ -248,6 +253,7 @@ export default class TimeTable extends Component{
 
             tempTable = tempTable.filter(obj => obj.group === e.target.value);
         } else if (this.state.category === 'Lecturer'){
+            selectedId = 0;
             this.setState({
                 selectedLecturer : e.target.value
             })
@@ -287,11 +293,61 @@ export default class TimeTable extends Component{
         })
     }
 
-    onChangeCategory(e){
-        e.preventDefault();
+    async onChangeCategory(e){
+        // e.preventDefault();
         this.setState({
             category : e.target.value
         });
+
+        if (e.target.value === 'Student'){
+            let groups = await axios.get('http://localhost:8000/table/getGroups');
+
+            if(groups.data.success){
+                let arr_groups = [];
+
+                for (let group of groups.data.groups){
+                    arr_groups.push(group._id.GroupOrSubGroupName)
+                }
+
+                this.setState({
+                    groups : arr_groups
+                })
+            } else {
+                console.log('groups failed')
+            }
+        } else if (e.target.value === 'Lecturer'){
+            let lecturers = await axios.get('http://localhost:8000/table/getLecturers');
+
+            if(lecturers.data.success){
+
+                let arr_lecturers = [];
+
+                for (let lecturer of lecturers.data.lecturers){
+                    arr_lecturers.push(lecturer.fullName)
+                }
+
+                this.setState({
+                    groups : arr_lecturers
+                })
+            } else {
+                console.log('groups failed')
+            }
+        } else if (e.target.value === 'Room'){
+            let rooms = await axios.get('http://localhost:8000/table/getRooms')
+
+            if (rooms.data.success){
+                let arr_rooms = [];
+
+                for (let room of rooms.data.rooms){
+                    arr_rooms.push(room.room);
+                }
+                this.setState({
+                    groups : arr_rooms
+                })
+            } else {
+                console.log('Rooms Failed')
+            }
+        }
     }
 
     sortByDay(arr_row){
@@ -302,8 +358,6 @@ export default class TimeTable extends Component{
             return order[a.day] - order[b.day];
         })
 
-
-
         return arr_row;
     }
 
@@ -312,13 +366,13 @@ export default class TimeTable extends Component{
 
         let iDay = 0;
         let htmlTag = '';
-        let prevTime = 0.00;
+        let rowSpans = [];
 
         for (let time = 8.30; time < 18.30; time++){
             let arr_row = await this.state.table.filter(obj =>obj.time === time);
 
             if (arr_row.length > 0){
-                htmlTag = htmlTag + '<tr><td>'+ time + '</td>';
+                htmlTag = htmlTag + '<tr><td>'+ time + "0"+ '</td>';
 
                 arr_row = this.sortByDay(arr_row)
                 let i = 1;
@@ -343,7 +397,8 @@ export default class TimeTable extends Component{
                     for (i; i < 8;){
 
                         if (i === iDay){
-                            htmlTag = htmlTag + '<td rowspan="'+subject.duration+'">' +subject.subject+ '<br/>'+ subject.lecturer + '<br/>' +subject.group+'</td>';
+                            htmlTag = htmlTag + '<td rowspan="'+subject.duration+'">' +subject.subject+ '<br/>'+ subject.lecturer + '<br/>' +subject.group+ '<br/>' +subject.room+'</td>';
+                            rowSpans.push({day : iDay, rowCount : (subject.duration - 1), startTime : time, endTime : (time + subject.duration - 1)});
                             i++;
                             break;
                         } else {
@@ -363,14 +418,22 @@ export default class TimeTable extends Component{
                 htmlTag = htmlTag + '</tr>'
             } else {
 
-                htmlTag = htmlTag + '<tr><td>'+ time + '</td>';
-                for (let i = 0; i < 7; i++){
+                htmlTag = htmlTag + '<tr><td>'+ time + "0"+ '</td>';
+                let skipColumnCount = 0;
+
+                for (let session of rowSpans){
+                    if ((session.startTime <= time) && (time <= session.endTime)){
+                        skipColumnCount++;
+                    }
+                }
+
+                for (let i = 1; i < (8 - skipColumnCount); i++){
                     htmlTag = htmlTag + '<td>---</td>';
                 }
                 htmlTag = htmlTag + '</tr>'
             }
         }
-
+        console.log(rowSpans)
         document.getElementById("tableBody").innerHTML = htmlTag;
     }
 
@@ -384,17 +447,17 @@ export default class TimeTable extends Component{
                             <div className="ml-3">
                                 <div className="form-inline">
                                     <label style={{fontSize:"15px"}}>
-                                        <input  type="radio" id="student" name="student" value = "Student" checked={this.state.category === "Student"}
-
+                                        <input  type="radio" id="category" name="student" value = "Student" checked={this.state.category === "Student"}
+                                                onChange = {this.onChangeCategory}
                                         /> Student
                                     </label>
                                     <label style={{fontSize:"15px"}}>
-                                        <input  type="radio" id="lecturer" name="lecturer" value = "Lecturer" checked={this.state.category === "Lecturer"}
+                                        <input  type="radio" id="category" name="lecturer" value = "Lecturer" checked={this.state.category === "Lecturer"}
                                                 onChange = {this.onChangeCategory}
                                         /> Lecturer
                                     </label>
                                     <label style={{fontSize:"15px"}}>
-                                        <input  type="radio" id="room" name="room" value = "Room" checked={this.state.category === "Room"}
+                                        <input  type="radio" id="category" name="room" value = "Room" checked={this.state.category === "Room"}
                                                 onChange = {this.onChangeCategory}
                                         /> Room
                                     </label>
@@ -405,7 +468,7 @@ export default class TimeTable extends Component{
                                 <select className="form-control " id="inlineFormCustomSelectPref"
                                         onChange={this.onChangeDrop}
                                 >
-                                    <option selected style={{fontSize: "15px;"}}>Choose Building...</option>
+                                    <option selected style={{fontSize: "15px;"}}>Choose...</option>
                                     {
                                         this.state.groups.map(group => {
                                             return (<option>{group}</option>);
