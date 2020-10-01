@@ -22,6 +22,7 @@ app.on('ready',function (){
     mainWindow.on('closed',function () {
         app.quit();
     })
+    mainWindow.openDevTools();
 
     //Build menu from template
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);

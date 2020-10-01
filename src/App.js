@@ -59,6 +59,9 @@ import TagAndSub from "./RoomAllocation/Tag&Sub";
 import RoomAllocationMain from "./RoomAllocation/RoomAllocationMain";
 import UnavailableTimes from "./RoomAllocation/UnavailableTimes";
 
+//TimeTable
+import TimeTable from "./TimeTable/TimeTable"
+
 function App() {
   return (
       <Router>
@@ -126,6 +129,9 @@ function App() {
             <Route path="/SessionNA" component={Session}/>
             <Route path="/GroupNA" component={Group}/>
             <Route path="/TimeAllocationMain" component={TimeAllocationMain}/>
+
+            {/* Time table */}
+            <Route path="/TimeTable" component={TimeTable}/>
 
         </switch>
       </Router>

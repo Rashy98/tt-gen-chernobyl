@@ -3,11 +3,36 @@ import nav from "../assets/css/navbar.css";
 import common from "../assets/css/common.css";
 import logo from "../assets/Images/logo.png"
 import {Link} from "react-router-dom";
+import axios from "axios";
+import { withRouter } from 'react-router-dom';
 
-export default class NavBar extends Component{
+
+class NavBar extends Component{
+
+    constructor(props) {
+        super(props);
+
+        this.createTable = this.createTable.bind(this);
+    }
 
     GoHome(){
         window.location = '/'
+    }
+
+    async createTable(e){
+
+        e.preventDefault();
+
+        let response = await axios.get('http://localhost:8000/generateTable/getStudentTable');
+
+        if (response.data.success){
+            this.props.history.push({
+                pathname : '/TimeTable'
+            });
+        } else {
+            alert('Failed to generate table')
+        }
+
     }
     render() {
         return (
@@ -48,10 +73,16 @@ export default class NavBar extends Component{
                         <Link className="nav-link " to="/StuStats" id="stats">Statistics</Link>
                     </li>
                     <br/>
-                    <button>Generate</button>
+                    <li className="nav-item">
+                        <Link className="nav-link " to="/TimeTable" id="timeTab">Time Table</Link>
+                    </li>
+                    <br/>
+                    <button onClick={this.createTable}>Generate</button>
                 </ul>
             </div>
             </div>
         );
     }
 }
+
+export default withRouter(NavBar);
