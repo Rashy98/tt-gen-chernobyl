@@ -79,12 +79,13 @@ export default class AddTagDetails extends Component{
             <div className="main">
                 <TagNav/>
                 <h3> Add Tag Details</h3>
-                <div className="form">
-                    <form className="form-inline" >
-                        <div className="form-group mx-sm-3 mb-2">
-                            <label htmlFor="btagInput" className="sr-only">Tag</label>
-                            <input type="text" className="form-control" id="tagInput" placeholder="Tag Name"
+                <div className="form ">
+                    <form className="form-inline ml-lg-5" >
+                        <div className="form-group mx-sm-3 mb-2" >
+                            <label htmlFor="btagInput" className="sr-only ml-5">Tag</label>
+                            <input type="text" className="form-control ml-5" id="tagInput" placeholder="Tag Name"
                                 //    value={this.state.tag}
+                                   style={{marginLeft:'80%'}}
                                    onChange={this.onChangeTag}
                                    required/>
                             <br/>

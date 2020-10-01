@@ -13,6 +13,8 @@ class TagOnly extends Component{
             roomData:[],
             selectedTag:"",
             roomsInDB:[],
+            tagSel:"",
+            roomVal:"",
 
         }
 
@@ -106,20 +108,37 @@ class TagOnly extends Component{
 
     Validation(){
         let valid = true;
+        // let empty = true;
 
         this.state.roomsInDB.map(room =>{
             this.state.rooms.map(r =>{
                 if(room === r.room){
                     console.log(room,r);
+                    this.setState({
+                        roomVal : "**Some or all rooms are added to this tag or select a room!"
+                    })
                     valid = false;
                 }
+
             })
         })
+        if(this.state.selectedTag === ""){
+            this.setState({
+                tagSel : "**Please select a tag"
+            })
+            valid = false;
+        }
+        else
+        {
+            this.setState({
+                tagSel : ""
+            })
+        }
 
         return valid;
     }
     AddRoomAllocation(e) {
-        e.preventDefault();
+        // e.preventDefault();
 
 
         this.Validation();
@@ -141,11 +160,12 @@ class TagOnly extends Component{
             this.setState({
                 rooms: [{room: ""}],
                 selectedTag: "",
+                roomVal:"",
             })
         }
         else
         {
-            alert('Some or all rooms already added!');
+            alert('Room not added!');
         }
     }
 
@@ -157,11 +177,11 @@ class TagOnly extends Component{
 
 
                     {/*<RoomAllocationMain/>*/}
-
+                <form>
                 <h5 className='mt-3'>Tag</h5>
                 <label className="sr-only" htmlFor="inlineFormCustomSelectPref">Tag</label>
                 <select className="form-control w-50" id="inlineFormCustomSelectPref" value={this.state.selectedTag}
-                        onChange={this.onChangeTag}>
+                        onChange={this.onChangeTag} required>
                     <option selected style={{fontSize: '15px'}}>Choose Tag...</option>
                     {this.state.tags.map(tag =>{
                         return(
@@ -171,6 +191,7 @@ class TagOnly extends Component{
                     })}
 
                 </select>
+                    <p style={{color:"red",fontSize:'14px'}}>{this.state.tagSel}</p>
             <form className="form-inline">
 
                 <h5 className='mt-3'>Room</h5>
@@ -189,6 +210,7 @@ class TagOnly extends Component{
                         >+
                 </button>
             </form>
+                    <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                 {this.state.rooms.map((roo, idx) => (
 
                     <div className="room">
@@ -200,6 +222,7 @@ class TagOnly extends Component{
                                 placeholder={`Room #${idx+1}`}
                                 value={roo.room}
                                 onChange={this.handleRoomsNameChange(idx)}
+                                required
                         >
                             <option selected style={{fontSize: "15px"}}>Choose room...</option>
                             {this.state.roomData.map(room =>{
@@ -229,8 +252,10 @@ class TagOnly extends Component{
                 Add Room Allocation
             </button>
         </div>
+                </form>
             </div>
             // </div>
+
         );
     }
 

@@ -79,7 +79,8 @@ export default class AddStudentData extends Component{
             });
     }
 
-    AddStudent(e){
+    AddStudent=(e)=>{
+        e.preventDefault();
         const student = {
                 year: this.state.year,
                 programme: this.state.programme,
@@ -118,14 +119,13 @@ export default class AddStudentData extends Component{
                 <StudNav/>
                 <h3> Add Student Details</h3>
                 <div className="form">
-                    <form className=" " >
+                    <form onSubmit={this.AddStudent}>
                         <div className="form-group mx-sm-3 mb-2">
                             <label style={{fontSize: '16px', color: "mediumslateblue"}} htmlFor="YearInputSelect">Offered Year</label><br/>
-                            <select className="form-control " id="YearInputSelect"
+                            <select  required className="form-control " id="YearInputSelect"
                                     onChange={this.onChangeYear}
-                                    required
                             >
-                                <option selected style={{fontSize:'15px'}}>Choose Year...</option>
+                                <option selected style={{fontSize:'15px'}} value="">Choose Year...</option>
                                 <option value="Y1.S1">1st Year 1st Semester</option>
                                 <option value="Y1.S2">1st Year 2nd Semester</option>
                                 <option value="Y2.S1">2nd Year 1st Semester</option>
@@ -143,7 +143,7 @@ export default class AddStudentData extends Component{
                                     onChange={this.onChangeProgramme}
                                     required
                             >
-                                <option selected style={{fontSize:'15px'}}>Choose Programme...</option>
+                                <option selected style={{fontSize:'15px'}} value="">Choose Programme...</option>
                                 <option value="IT">IT</option>
                                 <option value="SE">SE</option>
                                 <option value="CN">CN</option>
@@ -158,7 +158,7 @@ export default class AddStudentData extends Component{
                             <input type="number" className="form-control" id="GrpInput" placeholder="Group Number"
                                    onChange={this.onChangeGroups}
                                    value={this.state.groups}
-                                   required
+                                   required={true}
                             />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
@@ -169,7 +169,7 @@ export default class AddStudentData extends Component{
                                    required
                             />
                         </div>
-                        <button className="btn mb-2" style={{marginLeft: "40%",marginTop: "5%"}} onClick={this.AddStudent}>
+                        <button className="btn mb-2" style={{marginLeft: "40%",marginTop: "5%"}} >
                             Add Students
                         </button>
                     </form>
