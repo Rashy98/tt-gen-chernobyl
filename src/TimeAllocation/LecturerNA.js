@@ -146,6 +146,7 @@ class LecturerNA extends Component{
 
 
                 <div className="room">
+                <form onSubmit={this.AddTimeAllocation}>
 
                     <form className="form-inline">
 
@@ -168,7 +169,7 @@ class LecturerNA extends Component{
 
                     <form className='form-inline'>
                         <h5 className='mt-3'>Date </h5>
-                        <h5 style={{marginLeft:'21%'}} className='mt-3'>Start Time</h5>
+                        <h5 style={{marginLeft:'18%'}} className='mt-3'>Start Time</h5>
                         <h5 style={{marginLeft:'7%'}}className='mt-3'>End Time</h5>
                         <button id="add_field_button" className="btn btn-success"
                                 type='button'
@@ -186,13 +187,14 @@ class LecturerNA extends Component{
                         </button>
                     </form>
                     {this.state.times.map((time,idx) => (
-                        <div>
-                            <form className='form-inline'>
-                                <select className="form-control rooms w-25" id="room"
-                                        style={{width: "50%"}}
+                        <div className='custom-control-inline'>
+                            {/*<form className='form-inline'>*/}
+                                <select className="form-control rooms w-50" id="room"
+                                        style={{width: "80%"}}
                                         placeholder={`Day`}
                                         value={time.day}
                                         onChange={this.handleDayChange(idx)}
+                                        required
                                 >
                                     <option selected style={{fontSize: "15px"}}>Choose Day..</option>
                                     <option>Monday</option>
@@ -204,9 +206,9 @@ class LecturerNA extends Component{
                                     <option>Sunday</option>
 
                                 </select>
-                                <input className='form-control-sm ml-2' type='time' onChange={this.handleInTimeChange(idx)} value={time.intime}/>
+                                <input required className='form-control-sm ml-2' type='time' onChange={this.handleInTimeChange(idx)} value={time.intime}/>
                                 &nbsp;
-                                <input className='form-control-sm ml-2' type='time' onChange={this.handleOutTimeChange(idx)} value={time.outtime}/>
+                                <input required className='form-control-sm ml-2' type='time' onChange={this.handleOutTimeChange(idx)} value={time.outtime}/>
                                 &nbsp;
                                 <button
                                     type="button"
@@ -215,18 +217,19 @@ class LecturerNA extends Component{
                                 >
                                     X
                                 </button>
-                            </form>
+                            {/*</form>*/}
                         </div>
                     ))}
 
 
 
                     <br/>
-                    <div className="form-group mx-sm-3 mb-2 text-center">
-                        <button type="submit" className="btn my-1" onClick={this.AddTimeAllocation}>
+                    <div className="form-group mx-sm-3 mb-2 mt-5 text-center">
+                        <button type="submit" className="btn my-1" >
                             Add Time Allocation
                         </button>
                     </div>
+                </form>
                 </div>
             </div>
         );

@@ -80,7 +80,7 @@ export default class AddTagDetails extends Component{
                 <TagNav/>
                 <h3> Add Tag Details</h3>
                 <div className="form ">
-                    <form className="form-inline ml-lg-5" >
+                    <form className="form-inline ml-lg-5" onSubmit={this.AddTag}>
                         <div className="form-group mx-sm-3 mb-2" >
                             <label htmlFor="btagInput" className="sr-only ml-5">Tag</label>
                             <input type="text" className="form-control ml-5" id="tagInput" placeholder="Tag Name"
@@ -91,7 +91,7 @@ export default class AddTagDetails extends Component{
                             <br/>
                             <p className='text-danger small'>{this.state.tagVal}</p>
                         </div>
-                        <button className="btn mb-2" onClick={this.AddTag}>
+                        <button className="btn mb-2" type='submit' >
                             Add Tag
                         </button>
                     </form>
