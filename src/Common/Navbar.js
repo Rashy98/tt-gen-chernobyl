@@ -49,7 +49,7 @@ class NavBar extends Component{
                         <Link className="nav-link" to="/SubHome">Subjects</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/WorkingDaysMain" id="WorkingDaysMain">Working days</Link>
+                        <Link className="nav-link" to="/AddWeekdayWorkingDays" id="WorkingDaysMain">Working days</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link"  id="addStu" to="/AddStudent">Student Details</Link>

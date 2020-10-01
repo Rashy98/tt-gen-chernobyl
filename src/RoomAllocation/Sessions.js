@@ -27,6 +27,8 @@ class SessionRoomAll extends Component{
             consectID:any,
             selectedSess:"",
             roomsInDB:[],
+            sesSel:"",
+            roomVal:"",
 
 
 
@@ -174,12 +176,25 @@ class SessionRoomAll extends Component{
             this.state.rooms.map(r =>{
                 if(room === r.room){
                     console.log(room,r);
+                    this.setState({
+                        roomVal : "**Some or all rooms are added to this session or select a room!"
+                    })
                     valid = false;
-
                 }
             })
         })
 
+        if( this.state.selectedSession === "" ){
+            this.setState({
+                sesSel : "**Please select a session"
+            })
+            valid = false;
+        }
+        else{
+            this.setState({
+                sesSel : ""
+            })
+        }
         return valid;
     }
 
@@ -223,7 +238,6 @@ class SessionRoomAll extends Component{
     AddRoomAllocation(e) {
         e.preventDefault();
 
-
        if(this.Validation()) {
 
            console.log(this.state.selectedID);
@@ -249,12 +263,13 @@ class SessionRoomAll extends Component{
                rooms: [{room: ""}],
                S_session: "",
                consSession: "",
+               roomVal:""
 
            })
        }
        else{
 
-               alert('One,some or all rooms are already allocated to the session/sessions');
+               alert('Room Not allocated');
 
        }
 
@@ -280,7 +295,7 @@ class SessionRoomAll extends Component{
                             })}
                         </select>
 
-
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.sesSel}</p>
 
                 {console.log("Consecutive "+this.state.consSession)}
                 {console.log("selected"+this.state.S_session)}
@@ -313,7 +328,9 @@ class SessionRoomAll extends Component{
                             onClick={this.handleAddRooms}
                     >+
                     </button>
+
                 </form>
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                 {this.state.rooms.map((room, idx) => (
 
                     <div className="room">

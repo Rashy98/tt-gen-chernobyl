@@ -17,6 +17,7 @@ class GroupAndSub extends Component{
             selectedGrp:"",
             roomsInDB:[],
             roomVal:"",
+            grpSel:""
 
         }
 
@@ -95,7 +96,7 @@ class GroupAndSub extends Component{
                 if(room === r.room){
                     console.log(room,r);
                     this.setState({
-                        roomVal : "**Some or all rooms are added to this tag or select a room!"
+                        roomVal : "**Some or all rooms are added to this group/sub group or select a room!"
                     })
                     valid = false;
                 }
@@ -178,7 +179,8 @@ class GroupAndSub extends Component{
                 rooms: [{room: ""}],
                 selectedRadio: "Group",
                 selectedTag: "",
-                selectedGrp: ""
+                selectedGrp: "",
+                roomVal:""
             })
         }
         else{
