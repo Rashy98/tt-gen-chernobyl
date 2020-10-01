@@ -23,7 +23,7 @@ export default class WorkingDaysMain extends Component{
                             className="btn mb-2"
                             style={{backgroundColor: "#312450", color: "white", float: "left"}}
                             id="addWorkingDays"
-                        ><Link to={'/AddWeekdayWorkingDays'} />
+                        ><Link to='/AddWeekdayWorkingDays' />
                         Add Working Days</button>
 
                         <button type="submit"

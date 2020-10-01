@@ -164,22 +164,25 @@ class ConsecutiveSessions extends Component{
                 <TagNav/>
                 <h3> Consecutive Sessions Allocation</h3>
                 <div className="form">
+                <form onSubmit={this.AddSessionAllocation}>
 
-                    <form className="form-inline">
+                    {/*<form className="form-inline">*/}
 
                         <h5 className='mt-3'>Select Sessions to Allocate</h5>
 
-                    </form>
+                    {/*</form>*/}
                     {/*{this.state.groups.map((group, idx) => (*/}
 
                     <div className="room">
 
-                        <form className="form-inline mt-2">
+                        {/*<form className="form-inline mt-2">*/}
 
-                            <select className="form-control w-100" id={this.state.selectedID}
+                            <select className="form-control w-75 mt-2" id={this.state.selectedID}
                                     value={this.state.selectedSession}
-                                    onChange={this.onChangeSession}>
-                                <option selected style={{fontSize: '15px'}}>Choose Session...</option>
+                                    onChange={this.onChangeSession}
+                                    required
+                            >
+                                <option selected style={{fontSize: '15px'}}value="">Choose Session...</option>
                                 {this.state.sessions.map((sess,id) => {
                                     return (
                                         <option value={sess.GeneratedSession} id={sess.GeneratedSessionID}>
@@ -190,13 +193,15 @@ class ConsecutiveSessions extends Component{
                             </select>
 
 
-                        </form>
-                        <form className="form-inline mt-2">
+                        {/*</form>*/}
+                        {/*<form className="form-inline mt-2">*/}
 
-                            <select className="form-control w-100" id={this.state.selectedID1}
+                            <select className="form-control w-75 mt-2" id={this.state.selectedID1}
                                     value={this.state.selectedSession1}
-                                    onChange={this.onChangeSession1}>
-                                <option selected style={{fontSize: '15px'}}>Choose Session...</option>
+                                    onChange={this.onChangeSession1}
+                                    required
+                            >
+                                <option selected style={{fontSize: '15px'}} value="">Choose Session...</option>
                                 {this.state.secondsessions.map((tok,id) => {
                                     return (
                                         <option value={tok.GeneratedSession} id={tok.GeneratedSessionID}>
@@ -206,17 +211,18 @@ class ConsecutiveSessions extends Component{
                                 })}
                             </select>
 
-                        </form>
+                        {/*</form>*/}
 
                     </div>
 
 
                     <br/>
                     <div className="form-group mx-sm-3 mb-2 text-center">
-                        <button type="submit" className="btn my-1" onClick={this.AddSessionAllocation}>
+                        <button type="submit" className="btn my-1" >
                             Allocate Sessions
                         </button>
                     </div>
+                </form>
                 </div>
             </div>
         );
