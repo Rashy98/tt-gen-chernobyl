@@ -4,8 +4,10 @@ import common from "../assets/css/common.css";
 import logo from "../assets/Images/logo.png"
 import {Link} from "react-router-dom";
 import axios from "axios";
+import { withRouter } from 'react-router-dom';
 
-export default class NavBar extends Component{
+
+class NavBar extends Component{
 
     constructor(props) {
         super(props);
@@ -21,15 +23,15 @@ export default class NavBar extends Component{
 
         e.preventDefault();
 
+        let response = await axios.get('http://localhost:8000/generateTable/getStudentTable');
 
-console.log('here')
-        // let response = await axios.get('http://localhost:8000/generateTable/getStudentTable');
-        //
-        // if (response.data.success){
-        //
-        // } else {
-        //     alert('Failed to generate table')
-        // }
+        if (response.data.success){
+            this.props.history.push({
+                pathname : '/TimeTable'
+            });
+        } else {
+            alert('Failed to generate table')
+        }
 
     }
     render() {
@@ -82,3 +84,5 @@ console.log('here')
         );
     }
 }
+
+export default withRouter(NavBar);

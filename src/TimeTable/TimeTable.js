@@ -469,27 +469,27 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                     <div className="room">
                         <form className="form-inline">
                             <div className="ml-3">
-                                <div className="form-inline">
-                                    <label style={{fontSize:"15px"}}>
+                                <div className="form-inline ml-5">
+                                    <label  style={{fontSize:"15px", marginLeft:"10em"}}>
                                         <input  type="radio" id="category" name="student" value = "Student" checked={this.state.category === "Student"}
                                                 onChange = {this.onChangeCategory}
-                                        /> Student
+                                        /> &nbsp; Student
                                     </label>
-                                    <label style={{fontSize:"15px"}}>
+                                    <label style={{fontSize:"15px", marginLeft:"1em"}}>
                                         <input  type="radio" id="category" name="lecturer" value = "Lecturer" checked={this.state.category === "Lecturer"}
                                                 onChange = {this.onChangeCategory}
-                                        /> Lecturer
+                                        /> &nbsp; Lecturer
                                     </label>
-                                    <label style={{fontSize:"15px"}}>
+                                    <label style={{fontSize:"15px", marginLeft:"1em"}}>
                                         <input  type="radio" id="category" name="room" value = "Room" checked={this.state.category === "Room"}
                                                 onChange = {this.onChangeCategory}
-                                        /> Room
+                                        /> &nbsp; Room
                                     </label>
                                 </div>
                             </div>
 
                             <div className="ml-5 form-inline">
-                                <select className="form-control " id="inlineFormCustomSelectPref"
+                                <select className="form-control" style={{width:"20em"}} id="inlineFormCustomSelectPref"
                                         onChange={this.onChangeDrop}
                                 >
                                     <option selected style={{fontSize: "15px;"}}>Choose...</option>
@@ -502,7 +502,8 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                                 </select>
                             </div>
                             <div className="ml-3">
-                                <button onClick={this.createRow} className="rounded-circle">SEARCH</button>
+                                <button onClick={this.createRow} style={{color:"white", borderRadius:"20px", fontSize:"0.8em", padding:"0.2em 0.5em",
+                                                                            marginLeft:"2em"}} >SEARCH</button>
                             </div>
                         </form>
                     </div>
