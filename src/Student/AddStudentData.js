@@ -123,6 +123,7 @@ export default class AddStudentData extends Component{
                             <label style={{fontSize: '16px', color: "mediumslateblue"}} htmlFor="YearInputSelect">Offered Year</label><br/>
                             <select className="form-control " id="YearInputSelect"
                                     onChange={this.onChangeYear}
+                                    required
                             >
                                 <option selected style={{fontSize:'15px'}}>Choose Year...</option>
                                 <option value="Y1.S1">1st Year 1st Semester</option>
@@ -140,6 +141,7 @@ export default class AddStudentData extends Component{
                             <label style={{fontSize: '16px', color: "mediumslateblue"}} htmlFor="ProgInputSelect">Programme</label>
                             <select className="form-control " id="ProgInputSelect"
                                     onChange={this.onChangeProgramme}
+                                    required
                             >
                                 <option selected style={{fontSize:'15px'}}>Choose Programme...</option>
                                 <option value="IT">IT</option>
@@ -155,13 +157,17 @@ export default class AddStudentData extends Component{
                             <label htmlFor="GrpInput" style={{fontSize: '16px', color: "mediumslateblue"}}>Group Number</label>
                             <input type="number" className="form-control" id="GrpInput" placeholder="Group Number"
                                    onChange={this.onChangeGroups}
-                                   value={this.state.groups}/>
+                                   value={this.state.groups}
+                                   required
+                            />
                         </div>
                         <div className="form-group mx-sm-3 mb-2">
                             <label htmlFor="CodeInput" style={{fontSize: '16px', color: "mediumslateblue"}}>Sub Group Number</label>
                             <input type="number" className="form-control" id="CodeInput" placeholder="Sub group number"
                                    onChange={this.onChangeSubgroup}
-                                   value={this.state.subgroup}/>
+                                   value={this.state.subgroup}
+                                   required
+                            />
                         </div>
                         <button className="btn mb-2" style={{marginLeft: "40%",marginTop: "5%"}} onClick={this.AddStudent}>
                             Add Students
