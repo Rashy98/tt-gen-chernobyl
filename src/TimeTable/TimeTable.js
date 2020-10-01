@@ -394,11 +394,22 @@ export default class TimeTable extends Component{
                             break;
                     }
 
-                    for (i; i < 8;){
+                    let skipColumnCount = 0;
+
+                    if (rowSpans.length > 0){
+                        for (let session of rowSpans){
+                            if ((session.startTime <= time) && (time <= session.endTime)){
+                                skipColumnCount++;
+                            }
+                        }
+                    }
+
+                    for (i; i < (8 - skipColumnCount);){
 
                         if (i === iDay){
                             htmlTag = htmlTag + '<td rowspan="'+subject.duration+'">' +subject.subject+ '<br/>'+ subject.lecturer + '<br/>' +subject.group+ '<br/>' +subject.room+'</td>';
                             rowSpans.push({day : iDay, rowCount : (subject.duration - 1), startTime : time, endTime : (time + subject.duration - 1)});
+                            // console.log(time + " ------------- "+i + " ----------------- " + skipColumnCount)
                             i++;
                             break;
                         } else {
@@ -407,10 +418,23 @@ export default class TimeTable extends Component{
 
                         i++;
                     }
+
+
+                }
+
+                let skipColumnCount = 0;
+
+                if (rowSpans.length > 0){
+                    for (let session of rowSpans){
+                        if ((session.startTime < time) && (time <= session.endTime)){
+                            skipColumnCount++;
+                        }
+                    }
                 }
 
                 if (i < 8){
-                    for (i ; i < 8; i++){
+console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
+                    for (i ; i < (8 - skipColumnCount) ; i++){
                         htmlTag = htmlTag + '<td>***</td>';
                     }
                 }
