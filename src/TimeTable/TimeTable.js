@@ -416,7 +416,7 @@ export default class TimeTable extends Component{
                             i++;
                             break;
                         } else {
-                            htmlTag = htmlTag + '<td>+++</td>'
+                            htmlTag = htmlTag + '<td>---</td>'
                         }
 
                         i++;
@@ -438,7 +438,7 @@ export default class TimeTable extends Component{
                 if (i < 8){
 console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                     for (i ; i < (8 - skipColumnCount) ; i++){
-                        htmlTag = htmlTag + '<td>***</td>';
+                        htmlTag = htmlTag + '<td>---</td>';
                     }
                 }
 

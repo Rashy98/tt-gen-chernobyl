@@ -70,7 +70,7 @@ export default class AddTagDetails extends Component{
         else{
             alert("Tag NOT added!")
         }
-        window.location = '/ViewTag';
+        // window.location = '/ViewTag';
     }
 
     render() {

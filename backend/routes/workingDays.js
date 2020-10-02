@@ -68,9 +68,10 @@ router.route('/get').get((req, res) =>{
 /* ************************************************************************************************************** */
 router.route('/delete').delete((req, res) => {
 
+    console.log(req.body.dayType);
     WorkingDays.findOneAndDelete({dayType : req.body.dayType})
         .then(result => {
-
+            console.log(result)
             if(result){
                 return res.status(200).json({success : true, result : result})
             } else {

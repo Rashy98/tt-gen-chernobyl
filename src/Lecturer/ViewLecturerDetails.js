@@ -26,10 +26,10 @@ const Lecturer = props => (
             </button>
             &nbsp;
             <button className="btn my-1">
-                <a href="#" style={{color:"lavender"}}
+                <Link href="#" style={{color:"lavender"}}
                    onClick={() => {props.RemoveLecturer(props.lecturer._id)}}>
                     Delete
-                </a>
+                </Link>
             </button>
         </td>
     </tr>

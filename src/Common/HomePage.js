@@ -65,13 +65,13 @@ export default class HomePage extends Component{
                         <Col xs={6} md={3}>
                             <button style={{backgroundColor:'white',border:'none'}}>
                                 <Image src={Session} roundedCircle style={{width:'8em'}}/>
-                                <Link to={'/'}>Sessions</Link>
+                                <Link to={'/AddSession'}>Sessions</Link>
                             </button>
                         </Col>
                         <Col xs={6} md={3}>
                             <button style={{backgroundColor:'white',border:'none'}}>
                                 <Image src={TimeAll} roundedCircle style={{width:'8em'}}/>
-                                <Link to={'/'}>Time allocation</Link>
+                                <Link to={'/TimeAllocationMain'}>Time allocation</Link>
                             </button>
                         </Col>
                     </Row>
@@ -80,7 +80,7 @@ export default class HomePage extends Component{
                         <Col xs={6} md={3}>
                             <button style={{backgroundColor:'white',border:'none'}}>
                                 <Image src={RoomAll} roundedCircle style={{width:'8em'}}/>
-                                <Link to={'/'}>Room allocation</Link>
+                                <Link to={'/RoomAlMain'}>Room allocation</Link>
                             </button>
                         </Col>
 

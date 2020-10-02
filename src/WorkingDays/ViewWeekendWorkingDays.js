@@ -5,6 +5,7 @@ import {Table} from "react-bootstrap";
 import axios from "axios";
 import { withRouter } from 'react-router-dom';
 import WorkNav from "./Common/workingMainNav";
+import {Link} from 'react-router-dom';
 
 class ViewWeekendWorkingDays extends Component{
 
@@ -59,17 +60,16 @@ class ViewWeekendWorkingDays extends Component{
     }
 
     /* ---------------------------------------------- Delete Data --------------------------------------------------- */
-    deleteData = () => {
-
+    deleteData(){
         axios.delete('http://localhost:8000/workingdays/delete', {data : {dayType : "Weekend"}})
             .then(result => {
 
                 if(result.data.success){
                     alert('Successfully deleted');
 
-                    this.props.history.push({
-                        pathname : '/WorkingDaysMain'
-                    });
+                    // this.props.history.push({
+                    //     pathname : '/WorkingDaysMain'
+                    // });
                 } else {
                     alert('Failed to delete. Try again!')
                 }
@@ -157,8 +157,13 @@ class ViewWeekendWorkingDays extends Component{
                             <button type="submit"
                                     className="btn mb-2"
                                     style={{backgroundColor: "#312450", color: "white", marginLeft: "40px", width: "100px"}}
-                                    onClick = { this.deleteData }
-                            >Delete</button>
+                                    // onClick={this.deleteData}
+                            >
+                                <Link style={{color:'white'}}
+                                      onClick={()=>this.deleteData}>
+                                Delete
+                            </Link>
+                        </button>
                         </div>
                     </div>
                 </div>
