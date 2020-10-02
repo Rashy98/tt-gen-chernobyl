@@ -16,6 +16,8 @@ class GroupAndSub extends Component{
             selectedTag:"",
             selectedGrp:"",
             roomsInDB:[],
+            roomVal:"",
+            grpSel:""
 
         }
 
@@ -93,10 +95,26 @@ class GroupAndSub extends Component{
             this.state.rooms.map(r =>{
                 if(room === r.room){
                     console.log(room,r);
+                    this.setState({
+                        roomVal : "**Some or all rooms are added to this group/sub group or select a room!"
+                    })
                     valid = false;
                 }
             })
         })
+
+        if( this.state.selectedGrp === "" ){
+            this.setState({
+                grpSel : "**Please select a group/subgroup"
+            })
+            valid = false;
+        }
+        else{
+            this.setState({
+                grpSel : ""
+            })
+        }
+
 
         return valid;
     }
@@ -161,11 +179,12 @@ class GroupAndSub extends Component{
                 rooms: [{room: ""}],
                 selectedRadio: "Group",
                 selectedTag: "",
-                selectedGrp: ""
+                selectedGrp: "",
+                roomVal:""
             })
         }
         else{
-            alert('One,some or all rooms are already allocated to the Group');
+            alert('Room not allocated');
         }
 
     }
@@ -221,6 +240,7 @@ class GroupAndSub extends Component{
                     </select>
                     </div>
                 }
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.grpSel}</p>
 
 
 
@@ -241,6 +261,7 @@ class GroupAndSub extends Component{
                     >+
                     </button>
                 </form>
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                 {this.state.rooms.map((room, idx) => (
 
                     <div className="room">

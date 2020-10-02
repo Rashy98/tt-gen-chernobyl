@@ -133,86 +133,92 @@ class GroupNA extends Component{
 
 
                 <div className="room">
+                    <form onSubmit={this.AddTimeAllocation}>
 
-                    <form className="form-inline">
+                        {/*<form className="form-inline">*/}
 
-                        <select className="form-control "
-                                style={{width: "50%"}}
-                                placeholder='Room'
-                                value={this.state.selectedgroup}
-                                onChange={this.onChangeGroups}
-                        >
-                            <option selected style={{fontSize: "15px",width: "100%"}}>Choose Group...</option>
-                            {this.state.groups.map(group =>{
-                                return(
-                                    <option value={group.groupId}>{group.groupId}</option>
-                                )
-                            })}
+                            <select className="form-control "
+                                    style={{width: "50%"}}
+                                    placeholder='Room'
+                                    value={this.state.selectedgroup}
+                                    onChange={this.onChangeGroups}
+                                    required
+                            >
+                                <option selected style={{fontSize: "15px",width: "100%"}} value=" ">Choose Group...</option>
+                                {this.state.groups.map(group =>{
+                                    return(
+                                        <option value={group.groupId}>{group.groupId}</option>
+                                    )
+                                })}
 
-                        </select>
-                    </form>
+                            </select>
+                        {/*</form>*/}
 
-                    <form className='form-inline'>
-                        <h5 className='mt-3'>Date </h5>
-                        <h5 style={{marginLeft:'21%'}} className='mt-3'>Start Time</h5>
-                        <h5 style={{marginLeft:'7%'}}className='mt-3'>End Time</h5>
-                        <button id="add_field_button" className="btn btn-success"
-                                type='button'
-                                style={{width: '30px',
-                                    height: '30px',
-                                    padding: '2px',
-                                    borderRadius: '15px',
-                                    textAlign: 'center',
-                                    fontSize: '15px',
-                                    // lineHeight: '1.42857',
-                                    marginLeft:'20px',
-                                }}
-                                onClick={this.handleAddTime}
-                        >+
-                        </button>
-                    </form>
-                    {this.state.times.map((time, idx) => (
-                        <div>
-                            <form className='form-inline'>
-                                <select className="form-control rooms w-25" id="room"
-                                        style={{width: "50%"}}
-                                        placeholder={`Day`}
-                                        value={time.day}
-                                        onChange={this.handleDayChange(idx)}
-                                >
-                                    <option selected style={{fontSize: "15px"}}>Choose Day..</option>
-                                    <option>Monday</option>
-                                    <option>Tuesday</option>
-                                    <option>Wednesday</option>
-                                    <option>Thursday</option>
-                                    <option>Friday</option>
-                                    <option>Saturday</option>
-                                    <option>Sunday</option>
+                        <form className='form-inline'>
 
-                                </select>
-                                <input className='form-control-sm ml-2' type='time' onChange={this.handleInTimeChange(idx)} value={time.time}/>
-                                &nbsp;
-                                <input className='form-control-sm ml-2' type='time' onChange={this.handleOutTimeChange(idx)} value={time.time}/>
-                                &nbsp;
-                                <button
-                                    type="button"
-                                    onClick={this.handleRemoveTimes(idx)}
-                                    className="btn btn-danger btn-sm"
-                                >
-                                    X
-                                </button>
-                            </form>
-                        </div>
-                    ))}
+                            <h5 className='mt-3'>Date </h5>
+                            <h5 style={{marginLeft:'18%'}} className='mt-3'>Start Time</h5>
+                            <h5 style={{marginLeft:'7%'}}className='mt-3'>End Time</h5>
+                            <button id="add_field_button" className="btn btn-success"
+                                    type='button'
+                                    style={{width: '30px',
+                                        height: '30px',
+                                        padding: '2px',
+                                        borderRadius: '15px',
+                                        textAlign: 'center',
+                                        fontSize: '15px',
+                                        // lineHeight: '1.42857',
+                                        marginLeft:'20px',
+                                    }}
+                                    onClick={this.handleAddTime}
+                            >+
+                            </button>
+
+                        </form>
+                        {this.state.times.map((time, idx) => (
+                            <div className='custom-control-inline'>
+                                {/*<form className='form-inline'>*/}
+                                    <select className="form-control rooms w-50" id="room"
+                                            style={{width: "50%"}}
+                                            placeholder={`Day`}
+                                            value={time.day}
+                                            onChange={this.handleDayChange(idx)}
+                                            required
+                                    >
+                                        <option selected value=" " style={{fontSize: "15px"}}>Choose Day..</option>
+                                        <option>Monday</option>
+                                        <option>Tuesday</option>
+                                        <option>Wednesday</option>
+                                        <option>Thursday</option>
+                                        <option>Friday</option>
+                                        <option>Saturday</option>
+                                        <option>Sunday</option>
+
+                                    </select>
+                                    <input required className='form-control-sm ml-2' type='time' onChange={this.handleInTimeChange(idx)} value={time.time}/>
+                                    &nbsp;
+                                    <input required className='form-control-sm ml-2' type='time' onChange={this.handleOutTimeChange(idx)} value={time.time}/>
+                                    &nbsp;
+                                    <button
+                                        type="button"
+                                        onClick={this.handleRemoveTimes(idx)}
+                                        className="btn btn-danger btn-sm"
+                                    >
+                                        X
+                                    </button>
+                                {/*</form>*/}
+                            </div>
+                        ))}
 
 
 
                     <br/>
-                    <div className="form-group mx-sm-3 mb-2 text-center">
-                        <button type="submit" className="btn my-1" onClick={this.AddTimeAllocation}>
+                    <div className="form-group mx-sm-3 mb-2 mt-5 text-center">
+                        <button type="submit" className="btn my-1" >
                             Add Time Allocation
                         </button>
                     </div>
+                    </form>
                 </div>
             </div>
         );

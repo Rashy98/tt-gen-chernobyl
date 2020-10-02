@@ -23,10 +23,10 @@ const Room = props => (
             &nbsp;
             <button className="btn my-1">
 
-                <a href="#" style={{color:"lavender"}}
+                <Link href="#" style={{color:"lavender"}}
                    onClick={() => {props.RemoveRoom(props.room._id)}}
                 >
-                    Delete</a></button>
+                    Delete</Link></button>
         </td>
     </tr>
 )

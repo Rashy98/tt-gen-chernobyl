@@ -15,6 +15,8 @@ class UnavailableTimes extends Component {
             unavailable: [],
             selectedTag: "",
             roomData:[],
+            roomSel:"",
+            roomVal:"",
 
         }
 
@@ -107,10 +109,24 @@ class UnavailableTimes extends Component {
         this.state.unavailable.map(unavailable =>{
             this.state.times.map(time =>{
                 if(time.day === unavailable.day && time.startTime === unavailable.startTime && time.endTime === unavailable.endTime){
+                    this.setState({
+                        roomVal : "**The times are already set as unavailable for this room or select a time!"
+                    })
                     valid = false;
                 }
             })
         })
+        if( this.state.room === "" ){
+            this.setState({
+                roomSel : "**Please select a group/subgroup"
+            })
+            valid = false;
+        }
+        else{
+            this.setState({
+                grpSel : ""
+            })
+        }
 
         return valid;
     }
@@ -157,7 +173,7 @@ class UnavailableTimes extends Component {
             })
         }
         else {
-            alert('The times are already set as unavailable for '+this.state.room);
+            alert('Room not allocated');
         }
     }
 
@@ -191,6 +207,7 @@ class UnavailableTimes extends Component {
                         </select>
                     </form>
 
+                    <p style={{color:"red",fontSize:'14px'}}>{this.state.roomSel}</p>
                     <form className='form-inline'>
                         <h5 className='mt-3'>Date and time</h5>
                         <button id="add_field_button" className="btn btn-success"
@@ -209,11 +226,13 @@ class UnavailableTimes extends Component {
                         >+
                         </button>
                     </form>
+                    <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                     <form className='form-inline'>
                         <h6 className='ml-3'>Day</h6>
                         <h6 style={{marginLeft: '9.3em'}}>Start time</h6>
                         <h6 style={{marginLeft: '2em'}}>End time</h6>
                     </form>
+
 
                     {this.state.times.map((time, idx) => (
                         <div>

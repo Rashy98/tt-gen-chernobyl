@@ -15,6 +15,9 @@ class TagAndSub extends Component{
             selectedTag:"",
             selectedSub:"",
             roomsInDB:[],
+            tagSel:"",
+            subSel:"",
+            roomVal:"",
 
         }
 
@@ -111,10 +114,35 @@ class TagAndSub extends Component{
             this.state.rooms.map(r =>{
                 if(room === r.room){
                     console.log(room,r);
+                    this.setState({
+                        roomVal : "**Some or all rooms are added to this tag or select a room!"
+                    })
                     valid = false;
                 }
             })
         })
+        if( this.state.selectedTag ==="" ){
+            this.setState({
+                tagSel : "**Please select a tag"
+            })
+            valid = false;
+        }
+        else{
+            this.setState({
+                tagSel : ""
+            })
+        }
+           if( this.state.selectedSub===""){
+               this.setState({
+                   subSel : "**Please select a subject"
+               })
+               valid = false;
+           }
+           else {
+               this.setState({
+                   subSel : ""
+               })
+           }
 
         return valid;
     }
@@ -178,7 +206,7 @@ class TagAndSub extends Component{
             })
         }
         else{
-            alert('One,some or all rooms are already allocated to '+this.state.selectedSub + "'s " +this.state.selectedTag);
+            alert('Rooms not allocated');
         }
 
     }
@@ -202,6 +230,7 @@ class TagAndSub extends Component{
                         })}
 
                     </select>
+                        <p style={{color:"red",fontSize:'14px'}}>{this.state.tagSel}</p>
                     </div>
                     {/*))}*/}
 
@@ -218,6 +247,7 @@ class TagAndSub extends Component{
                         })}
 
                     </select>
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.subSel}</p>
                     <form className="form-inline">
                         <h5 className='mt-3'>Room</h5>
                         <button id="add_field_button" className="btn btn-success"
@@ -234,6 +264,7 @@ class TagAndSub extends Component{
                                 onClick={this.handleAddRooms}
                         >+
                         </button>
+                        <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                     </form>
                     {this.state.rooms.map((room, idx) => (
 

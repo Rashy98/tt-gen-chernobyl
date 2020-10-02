@@ -14,6 +14,8 @@ class LecturerRoomAll extends Component{
             selectedLecturer:"",
             roomsInDB:[],
             valid: false,
+            lecSel:"",
+            roomVal:"",
 
         }
 
@@ -114,10 +116,26 @@ class LecturerRoomAll extends Component{
                 this.state.rooms.map(r =>{
                     if(room === r.room){
                         console.log(room,r);
+                        this.setState({
+                            roomVal : "**One,some or all rooms are already allocated to the lecturer"
+                        })
                         valid = false;
                     }
                 })
             })
+
+        if(this.state.selectedLecturer === ""){
+            this.setState({
+                lecSel : "**Please select a tag"
+            })
+            valid = false;
+        }
+        else
+        {
+            this.setState({
+                lecSel : ""
+            })
+        }
 
         return valid;
     }
@@ -148,7 +166,7 @@ class LecturerRoomAll extends Component{
             })
         }
         else{
-            alert('One,some or all rooms are already allocated to the lecturer');
+            alert('Room not allocated');
         }
 
     }
@@ -170,6 +188,7 @@ class LecturerRoomAll extends Component{
                     })}
 
                 </select>
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.lecSel}</p>
 
                 <form className="form-inline">
                     <h5 className='mt-3'>Room</h5>
@@ -188,6 +207,7 @@ class LecturerRoomAll extends Component{
                     >+
                     </button>
                 </form>
+                <p style={{color:"red",fontSize:'14px'}}>{this.state.roomVal}</p>
                 {this.state.rooms.map((room, idx) => (
 
                     <div className="room">

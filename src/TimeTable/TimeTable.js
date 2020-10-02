@@ -1,15 +1,10 @@
 import React,{Component} from "react";
 // import workingDays from "../assets/css/workingdays.css";
 import axios from "axios";
+import Spinner from 'react-bootstrap/Spinner'
 // import location from "../assets/css/location.css"
 // import stat from "../assets/css/stats.css";
 // import {useTable} from "react-table";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
-
-// const jsPDF = require('jspdf');
-// require('jspdf-autotable');
-// import { format } from "date-fns";
 
 // const data = axios.get('http://localhost:8000/table/getTable');
 //
@@ -95,7 +90,7 @@ export default class TimeTable extends Component{
             selectedGroup : '',
             selectedLecturer : '',
             selectedRoom : '',
-            tableRows : ''
+            loading:true,
         }
 
         this.onChangeDrop = this.onChangeDrop.bind(this);
@@ -156,7 +151,8 @@ export default class TimeTable extends Component{
 
         if (response.data.success){
              await this.setState({
-                 sessionTable : response.data.table
+                 sessionTable : response.data.table,
+                 loading:false
              })
         } else {
             alert('response failed')
@@ -420,7 +416,7 @@ export default class TimeTable extends Component{
                             i++;
                             break;
                         } else {
-                            htmlTag = htmlTag + '<td>+++</td>'
+                            htmlTag = htmlTag + '<td>---</td>'
                         }
 
                         i++;
@@ -442,7 +438,7 @@ export default class TimeTable extends Component{
                 if (i < 8){
 console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                     for (i ; i < (8 - skipColumnCount) ; i++){
-                        htmlTag = htmlTag + '<td>***</td>';
+                        htmlTag = htmlTag + '<td>---</td>';
                     }
                 }
 
@@ -464,12 +460,9 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                 htmlTag = htmlTag + '</tr>'
             }
         }
-        this.setState({
-            tableRows : htmlTag
-        })
+        console.log(rowSpans)
         document.getElementById("tableBody").innerHTML = htmlTag;
     }
-
 
     render() {
 
@@ -520,23 +513,25 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                 </div>
 
                 <div>
-                    <table id="timeTable" className="table table-bordered">
+                    {this.state.loading? <Spinner style={{marginLeft:'100px'}}/>:<table className="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
-                            </tr>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
                         </thead>
 
                         <tbody id="tableBody">
                         </tbody>
                     </table>
+                    }
+
                 </div>
             </div>
         )

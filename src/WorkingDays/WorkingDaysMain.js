@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import workingDays from "../assets/css/workingdays.css";
+import {Link} from "react-router-dom";
 import history from "./Common/history";
 
 export default class WorkingDaysMain extends Component{
@@ -22,8 +23,8 @@ export default class WorkingDaysMain extends Component{
                             className="btn mb-2"
                             style={{backgroundColor: "#312450", color: "white", float: "left"}}
                             id="addWorkingDays"
-                            onClick={this.handleAddWorkingDaysClick}
-                        >Add Working Days</button>
+                        ><Link to='/AddWeekdayWorkingDays' />
+                        Add Working Days</button>
 
                         <button type="submit"
                             className="btn mb-2"

@@ -20,10 +20,10 @@ const Building = props => (
             &nbsp;
             <button className="btn my-1">
 
-                <a href="#" style={{color:"lavender"}}
+                <Link href="#" style={{color:"lavender"}}
                    onClick={() => {props.RemoveBuilding(props.building._id)}}
                 >
-                    Delete</a></button>
+                    Delete</Link></button>
         </td>
     </tr>
 )
