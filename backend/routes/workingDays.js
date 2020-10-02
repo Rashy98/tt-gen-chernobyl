@@ -66,7 +66,9 @@ router.route('/get').get((req, res) =>{
 /* ************************************************************************************************************** */
 /* ----------------------                 Delete working days and hours               --------------------------  */
 /* ************************************************************************************************************** */
-router.route('/delete').delete((req, res) => {
+router.route('/delete').post((req, res) => {
+
+    console.log(req.body)
 
     WorkingDays.findOneAndDelete({dayType : req.body.dayType})
         .then(result => {

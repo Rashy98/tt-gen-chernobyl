@@ -4,6 +4,12 @@ import axios from "axios";
 // import location from "../assets/css/location.css"
 // import stat from "../assets/css/stats.css";
 // import {useTable} from "react-table";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+
+// const jsPDF = require('jspdf');
+// require('jspdf-autotable');
+// import { format } from "date-fns";
 
 // const data = axios.get('http://localhost:8000/table/getTable');
 //
@@ -88,7 +94,8 @@ export default class TimeTable extends Component{
             category : 'Student',
             selectedGroup : '',
             selectedLecturer : '',
-            selectedRoom : ''
+            selectedRoom : '',
+            tableRows : ''
         }
 
         this.onChangeDrop = this.onChangeDrop.bind(this);
@@ -457,9 +464,12 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                 htmlTag = htmlTag + '</tr>'
             }
         }
-        console.log(rowSpans)
+        this.setState({
+            tableRows : htmlTag
+        })
         document.getElementById("tableBody").innerHTML = htmlTag;
     }
+
 
     render() {
 
@@ -510,7 +520,7 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                 </div>
 
                 <div>
-                    <table className="table table-bordered">
+                    <table id="timeTable" className="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Time</th>

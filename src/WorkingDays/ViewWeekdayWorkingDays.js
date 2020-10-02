@@ -60,14 +60,14 @@ class ViewWeekdayWorkingDays extends Component{
     /* ---------------------------------------------- Delete Data --------------------------------------------------- */
     deleteData = () => {
 
-        axios.delete('http://localhost:8000/workingdays/delete', {data : {dayType : "Weekday"}})
+        axios.post('http://localhost:8000/workingdays/delete', {dayType : "Weekday"})
             .then(result => {
 
                 if(result.data.success){
                     alert('Successfully deleted');
 
                     this.props.history.push({
-                        pathname : '/WorkingDaysMain'
+                        pathname : '/AddWeekdayWorkingDays'
                     });
                 } else {
                     alert('Failed to delete. Try again!')
