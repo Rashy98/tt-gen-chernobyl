@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 // import workingDays from "../assets/css/workingdays.css";
 import axios from "axios";
+import Spinner from 'react-bootstrap/Spinner'
 // import location from "../assets/css/location.css"
 // import stat from "../assets/css/stats.css";
 // import {useTable} from "react-table";
@@ -88,7 +89,8 @@ export default class TimeTable extends Component{
             category : 'Student',
             selectedGroup : '',
             selectedLecturer : '',
-            selectedRoom : ''
+            selectedRoom : '',
+            loading:true,
         }
 
         this.onChangeDrop = this.onChangeDrop.bind(this);
@@ -149,7 +151,8 @@ export default class TimeTable extends Component{
 
         if (response.data.success){
              await this.setState({
-                 sessionTable : response.data.table
+                 sessionTable : response.data.table,
+                 loading:false
              })
         } else {
             alert('response failed')
@@ -465,6 +468,7 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
 
         return(
             <div className="main">
+
                 <div className="row mt-5 align-content-center">
                     <div className="room">
                         <form className="form-inline">
@@ -510,23 +514,25 @@ console.log(time + " -------- " + skipColumnCount + " ---------- "+ i)
                 </div>
 
                 <div>
-                    <table className="table table-bordered">
+                    {this.state.loading? <Spinner style={{marginLeft:'100px'}}/>:<table className="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
-                            </tr>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
                         </thead>
 
                         <tbody id="tableBody">
                         </tbody>
                     </table>
+                    }
+
                 </div>
             </div>
         )
